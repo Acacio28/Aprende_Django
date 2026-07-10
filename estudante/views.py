@@ -33,6 +33,6 @@ def edit_estudante(request,id):
     return render(request,"edit_estudante.html",{"estudante":estudante})
 
 def delete_estudante(request,id):
-    estudante = get_object_or_404(estudante,id=id)
+    estudante = get_object_or_404(Estudante,id=id)
     estudante.delete()
     return redirect('lista')
