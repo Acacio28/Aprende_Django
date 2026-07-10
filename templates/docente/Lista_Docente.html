@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Docente</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex gap-2 mb-3">
+        <a href="/" class="btn btn-info">Dashboard</a>
+        <a href="{% url 'add_docente' %}" class="btn btn-success">Aumenta Docente</a>
+    </div>
+    <h1>Lista Docente</h1>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>NRE</th>
+                <th>Naran Docente</th>
+                <th>Hela Fatin</th>
+                <th>Telefone</th>
+                <th>Sexu</th>
+                <th>Materia</th>
+                <th>Data Kontratu</th>
+                <th>Aksaun</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in docentes %}
+            <tr>
+                <td>{{ x.nre }}</td>
+                <td>{{ x.naran_docente }}</td>
+                <td>{{ x.hela_fatin }}</td>
+                <td>{{ x.nu_telefone }}</td>
+                <td>{{ x.sexu }}</td>
+                <td>{{ x.materia }}</td>
+                <td>{{ x.data_kontratu }}</td>
+                <td>
+                    <a href="{% url 'edit_docente' x.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'delete_docente' x.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Apaga</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

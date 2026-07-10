@@ -4,7 +4,7 @@ from estudante.models import Estudante
 
 def Lista_estudante(request):
     alunos =Estudante.objects.all()
-    return render(request,"Lista_Estudante.html",{"alunos":alunos})
+    return render(request,"estudante/Lista_Estudante.html",{"alunos":alunos})
 
 
 def add_estudante(request):
@@ -16,7 +16,7 @@ def add_estudante(request):
         sexu=request.POST['sexu']
         Estudante.objects.create(nre=nre,naran_estudante=naran_estudante,hela_fatin=hela_fatin,nu_telefone=nu_telefone,sexu=sexu)
         return redirect('lista')
-    return render(request,"add_estudante.html")
+    return render(request,"estudante/add_estudante.html")
 
 
 def edit_estudante(request,id):
@@ -30,9 +30,9 @@ def edit_estudante(request,id):
         estudante.save()
         # return render(request,"lista")
         return redirect('lista')
-    return render(request,"edit_estudante.html",{"estudante":estudante})
+    return render(request,"estudante/edit_estudante.html",{"estudante":estudante})
 
 def delete_estudante(request,id):
-    estudante = get_object_or_404(estudante,id=id)
+    estudante = get_object_or_404(Estudante,id=id)
     estudante.delete()
     return redirect('lista')
