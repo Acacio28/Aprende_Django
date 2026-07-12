@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Aumenta Avaliasaun</title><link rel="stylesheet" href="/static/assets/css/bootstrap.min.css"></head>
+<body><div class="container mt-4"><h2>Aumenta Avaliasaun</h2><form method="POST">{% csrf_token %}
+<div class="mb-3"><label>Estudante</label><select name="estudante" class="form-control" required>{% for e in estudantes %}<option value="{{ e.id }}">{{ e.naran_estudante }}</option>{% endfor %}</select></div>
+<div class="mb-3"><label>Disciplina</label><select name="disciplina" class="form-control" required>{% for d in disciplinas %}<option value="{{ d.id }}">{{ d.naran_disciplina }}</option>{% endfor %}</select></div>
+<div class="mb-3"><label>Nota</label><input type="number" step="0.1" name="nota" class="form-control" required></div>
+<button type="submit" class="btn btn-success">Save</button><a href="{% url 'lista_avaliasaun' %}" class="btn btn-secondary">Fila</a></form></div></body></html>

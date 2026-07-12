@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Aumenta Turma</title><link rel="stylesheet" href="/static/assets/css/bootstrap.min.css"></head>
+<body><div class="container mt-4"><h2>Aumenta Turma</h2><form method="POST">{% csrf_token %}
+<div class="mb-3"><label>Naran Turma</label><input type="text" name="naran_turma" class="form-control" required></div>
+<div class="mb-3"><label>Ano Letitva</label><input type="text" name="ano_letitva" class="form-control" required></div>
+<button type="submit" class="btn btn-success">Save</button><a href="{% url 'lista_turma' %}" class="btn btn-secondary">Fila</a></form></div></body></html>

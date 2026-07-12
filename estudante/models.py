@@ -8,6 +8,7 @@ class Estudante(models.Model):
     hela_fatin = models.CharField(max_length=50, blank=True, default='')
     nu_telefone = models.CharField(max_length=15)
     sexu = models.CharField(max_length=4, choices=[("mane", "mane"), ("feto", "feto")])
+    turma = models.ForeignKey('akademiku.Turma', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.naran_estudante
