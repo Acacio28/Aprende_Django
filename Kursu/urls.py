@@ -7,4 +7,5 @@ urlpatterns = [
     path('', dashboard, name='dashboard'),
     path('estudante/', include('estudante.urls')),
     path('docente/', include('docente.urls')),
+    path('akademiku/', include('akademiku.urls')),
 ]

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aumenta Disciplina</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex gap-2 mb-3"><a href="/akademiku/" class="btn btn-info">Dashboard</a></div>
+    <h2>Aumenta Disciplina</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>Naran Disciplina</label>
+            <input type="text" name="naran_disciplina" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Docente</label>
+            <select name="docente" class="form-control">
+                <option value="">--- Hili Docente ---</option>
+                {% for d in docentes %}
+                <option value="{{ d.id }}">{{ d.naran_docente }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="{% url 'lista_disciplina' %}" class="btn btn-secondary">Fila</a>
+    </form>
+</div>
+</body>
+</html>

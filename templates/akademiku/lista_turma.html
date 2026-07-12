@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Turma</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex gap-2 mb-3">
+        <a href="/akademiku/" class="btn btn-info">Dashboard</a>
+        <a href="{% url 'add_turma' %}" class="btn btn-success">Aumenta Turma</a>
+    </div>
+    <h1>Lista Turma</h1>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Naran Turma</th>
+                <th>Ano Letivo</th>
+                <th>Aksaun</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in turmas %}
+            <tr>
+                <td>{{ t.naran_turma }}</td>
+                <td>{{ t.ano_letivo }}</td>
+                <td>
+                    <a href="{% url 'edit_turma' t.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'delete_turma' t.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Apaga</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-center">Dados la iha</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/" class="btn btn-secondary">Main Dashboard</a>
+</div>
+</body>
+</html>

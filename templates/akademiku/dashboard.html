@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Akademiku</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Dashboard Akademiku</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Turma</div>
+                <div class="card-body">
+                    <h5 class="card-title display-4">{{ total_turma }}</h5>
+                    <p class="card-text">Total Turma</p>
+                    <a href="{% url 'lista_turma' %}" class="btn btn-light">View Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Disciplina</div>
+                <div class="card-body">
+                    <h5 class="card-title display-4">{{ total_disciplina }}</h5>
+                    <p class="card-text">Total Disciplina</p>
+                    <a href="{% url 'lista_disciplina' %}" class="btn btn-light">View Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-header">Avaliasaun</div>
+                <div class="card-body">
+                    <h5 class="card-title display-4">{{ total_avaliasaun }}</h5>
+                    <p class="card-text">Total Avaliasaun</p>
+                    <a href="{% url 'lista_avaliasaun' %}" class="btn btn-light">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/" class="btn btn-secondary mt-3">Main Dashboard</a>
+</div>
+</body>
+</html>

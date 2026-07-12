@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Turma</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <div class="d-flex gap-2 mb-3"><a href="/akademiku/" class="btn btn-info">Dashboard</a></div>
+    <h1>Edit Turma</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>Naran Turma</label>
+            <input type="text" name="naran_turma" class="form-control" value="{{ turma.naran_turma }}" required>
+        </div>
+        <div class="mb-3">
+            <label>Ano Letivo</label>
+            <input type="text" name="ano_letivo" class="form-control" value="{{ turma.ano_letivo }}" required>
+        </div>
+        <button type="submit" class="btn btn-warning">Save</button>
+        <a href="{% url 'lista_turma' %}" class="btn btn-secondary">Fila</a>
+    </form>
+</div>
+</body>
+</html>
