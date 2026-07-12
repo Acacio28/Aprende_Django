@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Docente</title>
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Lista Docente</h1>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>NRE</th>
+                <th>Naran</th>
+                <th>Sexu</th>
+                <th>Materia</th>
+                <th>Aksaun</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in docentes %}
+            <tr>
+                <td>{{ x.nre }}</td>
+                <td>{{ x.naran_docente }}</td>
+                <td>{{ x.sexu }}</td>
+                <td>{{ x.materia }}</td>
+                <td>
+                    <a href="{% url 'edit_docente' x.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'delete_docente' x.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Apaga</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'add_docente' %}" class="btn btn-success">Aumenta Docente</a>
+</div>
+</body>
+</html>
