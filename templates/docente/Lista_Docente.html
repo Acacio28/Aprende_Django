@@ -2,7 +2,7 @@
 {% block title %}Lista Docente{% endblock %}
 {% block content %}
 <h1>Lista Docente</h1>
-<a href="{% url 'add_docente' %}" class="btn btn-success mb-3">Aumenta Docente</a>
+<form class="mb-3" method="get"><div class="input-group"><input type="text" name="q" class="form-control" placeholder="Buka..." value="{{ q }}"><button class="btn btn-outline-primary" type="submit">Buka</button></div></form><a href="{% url 'add_docente' %}" class="btn btn-success mb-3">Aumenta Docente</a>
 <table class="table table-bordered table-striped">
     <thead class="table-dark">
         <tr><th>NRE</th><th>Naran</th><th>Sexu</th><th>Materia</th><th>Aksaun</th></tr>
