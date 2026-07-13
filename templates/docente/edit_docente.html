@@ -1,30 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Docente</title>
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container mt-4">
-    <h1>Edit Docente</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <div class="mb-3"><label>NRE</label><input type="text" name="nre" class="form-control" value="{{ docente.nre }}" required></div>
-        <div class="mb-3"><label>Naran Docente</label><input type="text" name="naran_docente" class="form-control" value="{{ docente.naran_docente }}" required></div>
-        <div class="mb-3"><label>Hela Fatin</label><input type="text" name="hela_fatin" class="form-control" value="{{ docente.hela_fatin }}"></div>
-        <div class="mb-3"><label>Nu Telefone</label><input type="text" name="nu_telefone" class="form-control" value="{{ docente.nu_telefone }}" required></div>
-        <div class="mb-3"><label>Sexu</label>
-            <select name="sexu" class="form-control" required>
-                <option value="mane" {% if docente.sexu == "mane" %}selected{% endif %}>Mane</option>
-                <option value="feto" {% if docente.sexu == "feto" %}selected{% endif %}>Feto</option>
-            </select>
-        </div>
-        <div class="mb-3"><label>Materia</label><input type="text" name="materia" class="form-control" value="{{ docente.materia }}"></div>
-        <div class="mb-3"><label>Data Kontratu</label><input type="date" name="data_kontratu" class="form-control" value="{{ docente.data_kontratu|date:'Y-m-d' }}"></div>
-        <button type="submit" class="btn btn-warning">Save</button>
-        <a href="{% url 'lista_docente' %}" class="btn btn-secondary">Fila</a>
-    </form>
-</div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Edit Docente{% endblock %}
+{% block content %}
+<h1>Edit Docente</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3"><label>NRE</label><input type="text" name="nre" class="form-control" value="{{ docente.nre }}" required></div>
+    <div class="mb-3"><label>Naran Docente</label><input type="text" name="naran_docente" class="form-control" value="{{ docente.naran_docente }}" required></div>
+    <div class="mb-3"><label>Hela Fatin</label><input type="text" name="hela_fatin" class="form-control" value="{{ docente.hela_fatin }}"></div>
+    <div class="mb-3"><label>Nu Telefone</label><input type="text" name="nu_telefone" class="form-control" value="{{ docente.nu_telefone }}" required></div>
+    <div class="mb-3"><label>Sexu</label>
+        <select name="sexu" class="form-control" required>
+            <option value="mane" {% if docente.sexu == "mane" %}selected{% endif %}>Mane</option>
+            <option value="feto" {% if docente.sexu == "feto" %}selected{% endif %}>Feto</option>
+        </select>
+    </div>
+    <div class="mb-3"><label>Materia</label><input type="text" name="materia" class="form-control" value="{{ docente.materia }}"></div>
+    <div class="mb-3"><label>Data Kontratu</label><input type="date" name="data_kontratu" class="form-control" value="{{ docente.data_kontratu|date:'Y-m-d' }}"></div>
+    <button type="submit" class="btn btn-warning">Save</button>
+    <a href="{% url 'lista_docente' %}" class="btn btn-secondary">Fila</a>
+</form>
+{% endblock %}

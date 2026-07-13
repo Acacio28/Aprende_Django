@@ -1,5 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Edit Turma</title><link rel="stylesheet" href="/static/assets/css/bootstrap.min.css"></head>
-<body><div class="container mt-4"><h1>Edit Turma</h1><form method="POST">{% csrf_token %}
+{% extends "base.html" %}
+{% block title %}Edit Turma{% endblock %}
+{% block content %}
+<h1>Edit Turma</h1>
+<form method="POST">{% csrf_token %}
 <div class="mb-3"><label>Naran Turma</label><input type="text" name="naran_turma" class="form-control" value="{{ turma.naran_turma }}" required></div>
 <div class="mb-3"><label>Ano Letitva</label><input type="text" name="ano_letitva" class="form-control" value="{{ turma.ano_letitva }}" required></div>
-<button type="submit" class="btn btn-warning">Save</button><a href="{% url 'lista_turma' %}" class="btn btn-secondary">Fila</a></form></div></body></html>
+<button type="submit" class="btn btn-warning">Save</button><a href="{% url 'lista_turma' %}" class="btn btn-secondary">Fila</a>
+</form>
+{% endblock %}

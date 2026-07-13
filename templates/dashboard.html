@@ -1,45 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container mt-4">
-    <h1>Dashboard</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-header">Estudante</div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ total_estudante }}</h5>
-                    <p class="card-text">Total Estudante</p>
-                    <a href="{% url 'lista' %}" class="btn btn-light">View</a>
-                </div>
+{% extends "base.html" %}
+{% block title %}Dashboard - Sistema Escolar{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-header">Estudante</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_estudante }}</h5>
+                <p class="card-text">Total Estudante</p>
+                <a href="{% url 'lista' %}" class="btn btn-light">View</a>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-success mb-3">
-                <div class="card-header">Docente</div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ total_docente }}</h5>
-                    <p class="card-text">Total Docente</p>
-                    <a href="{% url 'lista_docente' %}" class="btn btn-light">View</a>
-                </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-header">Docente</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_docente }}</h5>
+                <p class="card-text">Total Docente</p>
+                <a href="{% url 'lista_docente' %}" class="btn btn-light">View</a>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">Akademiku</div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ total_turma }} Turma | {{ total_disciplina }} Disiplina | {{ total_avaliasaun }} Avaliasaun</h5>
-                    <a href="{% url 'lista_turma' %}" class="btn btn-light">View</a>
-                </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-header">Akademiku</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ total_turma }} Turma | {{ total_disciplina }} Disiplina | {{ total_avaliasaun }} Avaliasaun</h5>
+                <a href="{% url 'lista_turma' %}" class="btn btn-light">View</a>
             </div>
         </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}

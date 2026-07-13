@@ -1,43 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>edit_estudante</title>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-</head>
-<body>
-    <div class="container mt-4">
-        <h1>Edit_Estudante</h1>
-        <form method="POST">
-            {%csrf_token%}
-            <div class="mb-3">
-                <label>NRE</label>
-                <input type="text" name="nre" class="form-control" value ="{{estudante.nre}}" required>
-            </div>
-            <div class="mb-3">
-                <label>Naran_Estudante</label>
-                <input type="text" name="naran_estudante" class="form-control" value ="{{estudante.naran_estudante}}" required>
-            </div>
-            <div class="mb-3">
-                <label>Hela_Fatin</label>
-                <input type="text" name="hela_fatin" class="form-control" value ="{{estudante.hela_fatin}}" required>
-            </div>
-            <div class="mb-3">
-                <label>Nu_Telefone</label>
-                <input type="text" name="nu_telefone" class="form-control" value ="{{estudante.nu_telefone}}" required>
-            <div class="mb-3">
-    <select name="sexu" class="form-control" required>
-        <option value="Mane" {% if estudante.sexu == "Mane" %}selected{% endif %}>Mane</option>
-        <option value="Feto" {% if estudante.sexu == "Feto" %}selected{% endif %}>Feto</option>
-    </select>
-</div>
+{% extends "base.html" %}
+{% block title %}Edit Estudante{% endblock %}
+{% block content %}
+<h1>Edit Estudante</h1>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3"><label>NRE</label><input type="text" name="nre" class="form-control" value="{{ estudante.nre }}" required></div>
+    <div class="mb-3"><label>Naran Estudante</label><input type="text" name="naran_estudante" class="form-control" value="{{ estudante.naran_estudante }}" required></div>
+    <div class="mb-3"><label>Hela Fatin</label><input type="text" name="hela_fatin" class="form-control" value="{{ estudante.hela_fatin }}"></div>
+    <div class="mb-3"><label>Nu Telefone</label><input type="text" name="nu_telefone" class="form-control" value="{{ estudante.nu_telefone }}" required></div>
+    <div class="mb-3"><label>Sexu</label>
+        <select name="sexu" class="form-control" required>
+            <option value="mane" {% if estudante.sexu == "mane" %}selected{% endif %}>Mane</option>
+            <option value="feto" {% if estudante.sexu == "feto" %}selected{% endif %}>Feto</option>
+        </select>
+    </div>
+    <div class="mb-3"><label>Turma</label>
+        <select name="turma" class="form-control">
+            <option value="">-- La iha --</option>
+            {% for t in turmas %}
+            <option value="{{ t.id }}" {% if estudante.turma_id == t.id %}selected{% endif %}>{{ t.naran_turma }}</option>
+            {% endfor %}
+        </select>
+    </div>
     <button type="submit" class="btn btn-warning">Save</button>
     <a href="{% url 'lista' %}" class="btn btn-secondary">Fila</a>
-            </div>
-
-        </form>
-    </div>
-</body>
-</html>
+</form>
+{% endblock %}
