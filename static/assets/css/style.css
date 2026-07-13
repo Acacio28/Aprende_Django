@@ -1,0 +1,7 @@
+body { background: #f8f9fa; }
+footer { position: relative; bottom: 0; width: 100%; }
+.card { border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.table th { white-space: nowrap; }
+.navbar-brand { font-weight: bold; }
+.nota-low { color: #dc3545; font-weight: bold; }
+.nota-high { color: #198754; font-weight: bold; }
