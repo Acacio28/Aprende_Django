@@ -27,8 +27,38 @@
         <div class="card text-white bg-info mb-3">
             <div class="card-header">Akademiku</div>
             <div class="card-body">
-                <h5 class="card-title">{{ total_turma }} Turma | {{ total_disciplina }} Disiplina | {{ total_avaliasaun }} Avaliasaun</h5>
+                <h5 class="card-title">{{ total_turma }} Turma</h5>
+                <p>{{ total_disciplina }} Disiplina | {{ total_avaliasaun }} Avaliasaun</p>
                 <a href="{% url 'lista_turma' %}" class="btn btn-light">View</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card border-primary">
+            <div class="card-header bg-primary text-white">Nota Estatistika</div>
+            <div class="card-body">
+                <p><strong>Media Geral:</strong> {{ media_geral|floatformat:1 }}</p>
+                <p><strong>Nota Max:</strong> {{ nota_max|floatformat:1 }}</p>
+                <p><strong>Nota Min:</strong> {{ nota_min|floatformat:1 }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">Turma Populasaun</div>
+            <div class="card-body">
+                <ul class="list-group">
+                {% for t in turma_counts %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ t.naran_turma }}
+                        <span class="badge bg-primary rounded-pill">{{ t.total }}</span>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">Seidauk iha turma</li>
+                {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

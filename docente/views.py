@@ -1,9 +1,14 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from docente.models import Docente
 
+
 def Lista_docente(request):
+    q = request.GET.get('q', '')
     docentes = Docente.objects.all()
-    return render(request, "docente/Lista_Docente.html", {"docentes": docentes})
+    if q:
+        docentes = docentes.filter(naran_docente__icontains=q)
+    return render(request, "docente/Lista_Docente.html", {"docentes": docentes, "q": q})
+
 
 def add_docente(request):
     if request.method == "POST":
@@ -19,6 +24,7 @@ def add_docente(request):
         return redirect('lista_docente')
     return render(request, "docente/add_docente.html")
 
+
 def edit_docente(request, id):
     docente = get_object_or_404(Docente, id=id)
     if request.method == "POST":
@@ -28,6 +34,7 @@ def edit_docente(request, id):
         docente.save()
         return redirect('lista_docente')
     return render(request, "docente/edit_docente.html", {"docente": docente})
+
 
 def delete_docente(request, id):
     docente = get_object_or_404(Docente, id=id)
