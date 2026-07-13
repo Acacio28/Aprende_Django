@@ -4,8 +4,11 @@ from akademiku.models import Turma
 
 
 def Lista_estudante(request):
+    q = request.GET.get('q', '')
     alunos = Estudante.objects.select_related('turma').all()
-    return render(request, "estudante/Lista_Estudante.html", {"alunos": alunos})
+    if q:
+        alunos = alunos.filter(naran_estudante__icontains=q)
+    return render(request, "estudante/Lista_Estudante.html", {"alunos": alunos, "q": q})
 
 
 def add_estudante(request):
