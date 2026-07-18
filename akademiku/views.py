@@ -1,9 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from akademiku.models import Turma, Disciplina, Avaliasaun
+from django.db.models import Q
 
-# ------ Turma ------
 def Lista_turma(request):
-    return render(request, "akademiku/Lista_turma.html", {"turmas": Turma.objects.all()})
+    q = request.GET.get('q', '')
+    turmas = Turma.objects.all()
+    if q:
+        turmas = turmas.filter(Q(naran_turma__icontains=q) | Q(ano_letitva__icontains=q))
+    return render(request, "akademiku/Lista_turma.html", {"turmas": turmas, "q": q})
 
 def add_turma(request):
     if request.method == "POST":
@@ -21,9 +25,12 @@ def edit_turma(request, id):
 def delete_turma(request, id):
     get_object_or_404(Turma, id=id).delete(); return redirect('lista_turma')
 
-# ------ Disciplina ------
 def Lista_disciplina(request):
-    return render(request, "akademiku/Lista_disciplina.html", {"disciplinas": Disciplina.objects.select_related('docente').all()})
+    q = request.GET.get('q', '')
+    disciplinas = Disciplina.objects.select_related('docente').all()
+    if q:
+        disciplinas = disciplinas.filter(Q(naran_disciplina__icontains=q) | Q(docente__naran_docente__icontains=q))
+    return render(request, "akademiku/Lista_disciplina.html", {"disciplinas": disciplinas, "q": q})
 
 def add_disciplina(request):
     if request.method == "POST":
@@ -43,16 +50,18 @@ def edit_disciplina(request, id):
 def delete_disciplina(request, id):
     get_object_or_404(Disciplina, id=id).delete(); return redirect('lista_disciplina')
 
-# ------ Avaliasaun ------
 def Lista_avaliasaun(request):
-    return render(request, "akademiku/Lista_avaliasaun.html", {"avaliasauns": Avaliasaun.objects.select_related('estudante', 'disciplina').all()})
+    q = request.GET.get('q', '')
+    avaliasauns = Avaliasaun.objects.select_related('estudante', 'disciplina').all()
+    if q:
+        avaliasauns = avaliasauns.filter(Q(estudante__naran_estudante__icontains=q) | Q(disciplina__naran_disciplina__icontains=q))
+    return render(request, "akademiku/Lista_avaliasaun.html", {"avaliasauns": avaliasauns, "q": q})
 
 def add_avaliasaun(request):
     if request.method == "POST":
         Avaliasaun.objects.create(estudante_id=request.POST['estudante'], disciplina_id=request.POST['disciplina'], nota=request.POST['nota'])
         return redirect('lista_avaliasaun')
     from estudante.models import Estudante
-    from akademiku.models import Disciplina
     return render(request, "akademiku/add_avaliasaun.html", {"estudantes": Estudante.objects.all(), "disciplinas": Disciplina.objects.all()})
 
 def edit_avaliasaun(request, id):
@@ -61,7 +70,6 @@ def edit_avaliasaun(request, id):
         avaliasaun.estudante_id, avaliasaun.disciplina_id, avaliasaun.nota = request.POST['estudante'], request.POST['disciplina'], request.POST['nota']
         avaliasaun.save(); return redirect('lista_avaliasaun')
     from estudante.models import Estudante
-    from akademiku.models import Disciplina
     return render(request, "akademiku/edit_avaliasaun.html", {"avaliasaun": avaliasaun, "estudantes": Estudante.objects.all(), "disciplinas": Disciplina.objects.all()})
 
 def delete_avaliasaun(request, id):
