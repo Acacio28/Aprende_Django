@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.db.models import Avg
 from estudante.models import Estudante
-from akademiku.models import Turma
+from akademiku.models import Turma, Avaliasaun
 
 
 def Lista_estudante(request):
@@ -47,3 +48,12 @@ def delete_estudante(request, id):
     estudante.delete()
     messages.success(request, "Estudante apaga ho sucesso!")
     return redirect('lista')
+
+
+def detail_estudante(request, id):
+    estudante = get_object_or_404(Estudante.objects.select_related('turma'), id=id)
+    avaliasauns = Avaliasaun.objects.select_related('disciplina').filter(estudante=estudante)
+    media = avaliasauns.aggregate(Avg('nota'))['nota__avg'] or 0
+    return render(request, "estudante/detail_estudante.html", {
+        "estudante": estudante, "avaliasauns": avaliasauns, "media": media,
+    })

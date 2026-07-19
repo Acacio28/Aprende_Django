@@ -26,6 +26,7 @@
             <td>{{ x.sexu }}</td>
             <td>{{ x.turma.naran_turma|default:"-" }}</td>
             <td>
+                <a href="{% url 'detail_estudante' x.id %}" class="btn btn-sm btn-info">Detail</a>
                 <a href="{% url 'edit' x.id %}" class="btn btn-sm btn-warning">Edit</a>
                 <a href="{% url 'delete' x.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Apaga</a>
             </td>

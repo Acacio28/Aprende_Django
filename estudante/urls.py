@@ -7,3 +7,4 @@ urlpatterns =[
     path('hadia/<uuid:id>',views.edit_estudante,name='edit'),
     path('apaga/<uuid:id>',views.delete_estudante,name='delete')
 ]
+path('detail/<uuid:id>', views.detail_estudante, name='detail_estudante'),
