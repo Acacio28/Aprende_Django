@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
 from docente.models import Docente
 
 
@@ -13,14 +14,12 @@ def Lista_docente(request):
 def add_docente(request):
     if request.method == "POST":
         Docente.objects.create(
-            nre=request.POST['nre'],
-            naran_docente=request.POST['naran_docente'],
-            hela_fatin=request.POST['hela_fatin'],
-            nu_telefone=request.POST['nu_telefone'],
-            sexu=request.POST['sexu'],
-            materia=request.POST['materia'],
+            nre=request.POST['nre'], naran_docente=request.POST['naran_docente'],
+            hela_fatin=request.POST['hela_fatin'], nu_telefone=request.POST['nu_telefone'],
+            sexu=request.POST['sexu'], materia=request.POST['materia'],
             data_kontratu=request.POST.get('data_kontratu') or None,
         )
+        messages.success(request, "Docente aumenta ho sucesso!")
         return redirect('lista_docente')
     return render(request, "docente/add_docente.html")
 
@@ -32,6 +31,7 @@ def edit_docente(request, id):
             setattr(docente, f, request.POST[f])
         docente.data_kontratu = request.POST.get('data_kontratu') or None
         docente.save()
+        messages.success(request, "Docente hadia ho sucesso!")
         return redirect('lista_docente')
     return render(request, "docente/edit_docente.html", {"docente": docente})
 
@@ -39,4 +39,5 @@ def edit_docente(request, id):
 def delete_docente(request, id):
     docente = get_object_or_404(Docente, id=id)
     docente.delete()
+    messages.success(request, "Docente apaga ho sucesso!")
     return redirect('lista_docente')

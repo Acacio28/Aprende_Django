@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Detail Estudante{% endblock %}
+{% block content %}
+<h1>{{ estudante.naran_estudante }}</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header bg-primary text-white">Informasaun Pessoal</div>
+            <div class="card-body">
+                <p><strong>NRE:</strong> {{ estudante.nre }}</p>
+                <p><strong>Naran:</strong> {{ estudante.naran_estudante }}</p>
+                <p><strong>Hela Fatin:</strong> {{ estudante.hela_fatin|default:"-" }}</p>
+                <p><strong>Telefone:</strong> {{ estudante.nu_telefone }}</p>
+                <p><strong>Sexu:</strong> {{ estudante.sexu }}</p>
+                <p><strong>Turma:</strong> {{ estudante.turma.naran_turma|default:"La iha" }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header bg-success text-white">Nota Avaliasaun</div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <thead><tr><th>Disciplina</th><th>Nota</th><th>Status</th></tr></thead>
+                    <tbody>
+                        {% for a in avaliasauns %}
+                        <tr>
+                            <td>{{ a.disciplina.naran_disciplina }}</td>
+                            <td class="{% if a.nota >= 10 %}nota-high{% else %}nota-low{% endif %}">{{ a.nota }}</td>
+                            <td>{% if a.nota >= 10 %}<span class="badge bg-success">Pasa</span>{% else %}<span class="badge bg-danger">Reprova</span>{% endif %}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="3" class="text-muted">Seidauk iha avaliasaun</td></tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr class="table-secondary">
+                            <th>Media</th>
+                            <th>{{ media|floatformat:1 }}</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="{% url 'lista' %}" class="btn btn-secondary">Fila</a>
+{% endblock %}

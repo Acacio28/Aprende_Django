@@ -1,0 +1,17 @@
+<div class="modal fade" id="deleteModal{{ item.id }}" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Konfirmasaun Apaga</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                Ita boot sei apaga <strong>{{ item }}</strong>? Asaun ida ne'e labele fila fali.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kansela</button>
+                <a href="{{ delete_url }}" class="btn btn-danger">Apaga</a>
+            </div>
+        </div>
+    </div>
+</div>
