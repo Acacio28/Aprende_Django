@@ -29,10 +29,15 @@
             <td>
                 <a href="{% url 'detail_estudante' x.id %}" class="btn btn-sm btn-info">Detail</a>
                 <a href="{% url 'edit' x.id %}" class="btn btn-sm btn-warning">Edit</a>
-                <a href="{% url 'delete' x.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza?')">Apaga</a>
+                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ x.id }}">Apaga</button>
             </td>
         </tr>
         {% endfor %}
     </tbody>
+{% for x in alunos %}
+{% with item=x delete_url="{% url 'delete' x.id %}" %}
+{% include "includes/delete_modal.html" %}
+{% endwith %}
+{% endfor %}
 </table>
 {% endblock %}
