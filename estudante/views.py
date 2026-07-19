@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.db.models import Avg
+from django.http import HttpResponse
+import csv
 from estudante.models import Estudante
 from akademiku.models import Turma, Avaliasaun
 
@@ -57,3 +59,14 @@ def detail_estudante(request, id):
     return render(request, "estudante/detail_estudante.html", {
         "estudante": estudante, "avaliasauns": avaliasauns, "media": media,
     })
+
+
+def export_csv_estudante(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="estudantes.csv"'
+    w = csv.writer(response)
+    w.writerow(['NRE', 'Naran', 'Hela Fatin', 'Telefone', 'Sexu', 'Turma'])
+    for e in Estudante.objects.select_related('turma').all():
+        w.writerow([e.nre, e.naran_estudante, e.hela_fatin, e.nu_telefone, e.sexu, e.turma.naran_turma if e.turma else ''])
+    messages.success(request, "CSV export ho sucesso!")
+    return response

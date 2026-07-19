@@ -2,6 +2,7 @@ from django.urls import path
 from estudante import views
 
 urlpatterns =[
+    path("export-csv", views.export_csv_estudante, name="export_csv_estudante"),
     path('',views.Lista_estudante,name='lista'),
     path('aumenta',views.add_estudante,name='add'),
     path('hadia/<uuid:id>',views.edit_estudante,name='edit'),
