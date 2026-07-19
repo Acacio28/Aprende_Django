@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
 from estudante.models import Estudante
 from akademiku.models import Turma
 
@@ -15,13 +16,11 @@ def add_estudante(request):
     if request.method == "POST":
         turma_id = request.POST.get('turma') or None
         Estudante.objects.create(
-            nre=request.POST['nre'],
-            naran_estudante=request.POST['naran_estudante'],
-            hela_fatin=request.POST['hela_fatin'],
-            nu_telefone=request.POST['nu_telefone'],
-            sexu=request.POST['sexu'],
-            turma_id=turma_id,
+            nre=request.POST['nre'], naran_estudante=request.POST['naran_estudante'],
+            hela_fatin=request.POST['hela_fatin'], nu_telefone=request.POST['nu_telefone'],
+            sexu=request.POST['sexu'], turma_id=turma_id,
         )
+        messages.success(request, "Estudante aumenta ho sucesso!")
         return redirect('lista')
     turmas = Turma.objects.all()
     return render(request, "estudante/add_estudante.html", {"turmas": turmas})
@@ -37,6 +36,7 @@ def edit_estudante(request, id):
         estudante.sexu = request.POST['sexu']
         estudante.turma_id = request.POST.get('turma') or None
         estudante.save()
+        messages.success(request, "Estudante hadia ho sucesso!")
         return redirect('lista')
     turmas = Turma.objects.all()
     return render(request, "estudante/edit_estudante.html", {"estudante": estudante, "turmas": turmas})
@@ -45,4 +45,5 @@ def edit_estudante(request, id):
 def delete_estudante(request, id):
     estudante = get_object_or_404(Estudante, id=id)
     estudante.delete()
+    messages.success(request, "Estudante apaga ho sucesso!")
     return redirect('lista')
